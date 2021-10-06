@@ -1,5 +1,5 @@
 # kodecamp
-Codekamp nodejs tutorial 
+Kodecamp nodejs tutorial 
 
 ### How to start testing these codes
 > The code below assumes you have viual studio code installed. delete the "**&& code .**" part if you don't
