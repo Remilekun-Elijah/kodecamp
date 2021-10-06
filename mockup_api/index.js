@@ -7,7 +7,7 @@ var app = express();
 /** MIDDLEWARE  Analogy **/
 /*
 middleware is a function that gets executed before the route handler
-it is used to check if the user is authenticated or not before allowing the user to access the route
+it is used to check if the user is authenticated or not before allowing the user to access the route handler
 >> User       Middleware                    Middleware       Handler
 // Client -- express.json(bodyParser), app.use(morgan) -- function(handler)
 */
@@ -48,9 +48,14 @@ function getAllUsers(req, res) {
     }
 }
 
+// get all users
+app.get("/user/all", getAllUsers);
+
+
 // handler
 function updateUser(req, res) {
     const id = parseInt(req.params.id);
+    // finds the user 
     const user = allUserRecords.find((user, index) => {
         // returns the user with their index(position) in the array(database)
         if (user.id === id) return user.dataId = index;
@@ -71,7 +76,7 @@ function updateUser(req, res) {
 
         // updates the user record with the updated one
         allUserRecords.splice(user.dataId, 1, updatedUserRecord);
-        // sends out all users records with the updated one
+        // sends out the updated user record
         res.status(201).json({ success: true, data: updatedUserRecord, message: "User updated successfully" });
     } else res.status(404).json({ success: false, message: "User not found" });
 }
@@ -79,9 +84,6 @@ function updateUser(req, res) {
 // updates a user 
 app.put('/user/:id', updateUser);
 
-
-// get all users
-app.get("/user/all", getAllUsers);
 
 
 // handler 
@@ -127,6 +129,7 @@ app.post("/user", (req, res) => {
     }
 });
 
+// delete a user
 app.delete('/user/:id', (req, res) => {
     const id = parseInt(req.params.id);
 
@@ -144,7 +147,7 @@ app.delete('/user/:id', (req, res) => {
             return false;
         }
     });
-
+    // checks if the user was found or not
     if (user) {
         // delete the user using their index
         allUserRecords.splice(user.dataId, 1);
@@ -155,5 +158,5 @@ app.delete('/user/:id', (req, res) => {
 
 // set the port to listening on 
 app.set('port', process.env.PORT || 3000);
-
+// get the port and listen on it
 app.listen(app.get("port"), _ => console.log(`listening on port ${app.get("port")}`));
