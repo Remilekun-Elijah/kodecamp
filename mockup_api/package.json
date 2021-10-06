@@ -1,0 +1,19 @@
+{
+    "name": "nodejs_intro",
+    "version": "1.0.0",
+    "description": "an introduction to nodejs",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index",
+        "dev": "nodemon index",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Remilekun Elijah",
+    "license": "MIT",
+    "devDependencies": {
+        "nodemon": "^2.0.13"
+    },
+    "dependencies": {
+        "express": "^4.17.1"
+    }
+}
