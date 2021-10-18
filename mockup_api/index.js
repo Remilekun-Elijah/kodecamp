@@ -18,35 +18,30 @@ app.use(express.static(path.resolve('public')));
 /** MIDDLEWARE  Analogy **/
 /*
 middleware is a function that gets executed before the route handler
-it is used to check if the user is authenticated or not before allowing the user to access the route
+it is used to check if the user is authenticated or not before allowing the user to access the route handler
 >> User       Middleware                    Middleware       Handler
 // Client -- express.json(bodyParser), app.use(morgan) -- function(handler)
 */
 // express.json(bodyParser) middleware to parse the request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-/* 
-    ALL USER RECORDS    
- serves as our mock database
-*/
 
 app.get('/', user.homepage)
 
 // updates a user 
 app.put('/user/:id', upload.single("avatar"), user.updateUser);
 
-
 // get all users
 app.get("/user/all", user.getAllUsers);
+
 // Get a single user
 app.get("/user/:id", user.getOneUser);
 // create a user
 app.post("/user", user.createUser);
 app.delete('/user/:id', user.deleteUser);
 
-
 app.post("/contact", contact.processForm);
 // set the port to listening on 
 app.set('port', process.env.PORT || 3000);
-
+// get the port and listen on it
 app.listen(app.get("port"), _ => console.log(`listening on port ${app.get("port")}`));
