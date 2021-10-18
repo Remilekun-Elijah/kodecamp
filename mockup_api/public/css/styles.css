@@ -1,0 +1,103 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    Background-color: #F9FCFC;
+    box-sizing: border-box;
+}
+#cont{
+    font-family: roboto, sans-serif;
+
+}
+#main{
+    margin: 30px 250px 60px 250px;
+    
+}
+#main h1{
+    text-align: center;
+}
+.toyy img{
+    width: 100%;
+    height: auto;
+ 
+}
+#maintop{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    width: 100%;
+ 
+
+}
+.toy{
+    padding: 0px 20px 20px 20px;
+    width: 50%;
+}
+.toy h2{
+    display: inline-block;
+    text-align: center;
+    padding: 5px;
+    border-bottom: #D89616 solid 3px;
+    margin-bottom: 20px;
+    
+   
+
+}
+#contact h1{
+    text-align: left;
+}
+#contact{
+    padding: 50px 110px;
+    
+}
+#contact div{
+  padding: 30px 90px 90px 90px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px gray;
+}
+input[type="text"]{
+    height: 43px;
+}
+input[type="text"], textarea{
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+}
+label{
+    line-height: 21px;
+}
+button{
+font-size: 20px;
+background-color: #004DE6C2;
+border-radius: 8px;
+color: white;
+padding: 5px 15px  ;
+width: 217px;
+float: right;
+}
+
+@media screen and (max-width:1212px) {
+    #main{
+        margin: 30px 100px 60px 100px;
+        
+    }
+}
+@media screen and (max-width:1015px) {
+    #main{
+        margin: 30px 50px 60px 50px;
+        
+    }
+}
+@media screen and (max-width:1015px) {
+    #main{
+        margin: 30px 0 60px 0;
+        width: 100%;
+    }
+    .toy{
+        padding-right: 2px;
+        padding-top: 0px;
+    }
+}

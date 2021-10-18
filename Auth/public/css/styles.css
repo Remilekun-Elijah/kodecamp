@@ -1,0 +1,75 @@
+body {
+    overflow-x: hidden;
+}
+
+.profile-pic img {
+    width: 100px;
+    height: 100px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.alert {
+    position: absolute;
+    top: 3em;
+    left: 0px;
+    right: 0px;
+    transform: translateX(100%);
+    transition: all .5s;
+}
+
+#noUser,
+#signupErr {
+    font-size: 17px;
+}
+
+#profile input::placeholder {
+    font-size: 17px;
+    color: #333;
+}
+
+#profile input {
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding-bottom: .5px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+#profile input:focus {
+    outline: none !important;
+    border-bottom: 4px solid #000;
+}
+
+.modal-img {
+    height: 20rem !important;
+}
+
+.modal-content {
+    max-width: 400px;
+}
+
+.form-control:focus,
+.form-control {
+    outline: none !important;
+    border-color: #333 !important;
+    box-shadow: 0 0 0 transparent;
+}
+
+.options {
+    font-size: 18px;
+    position: absolute;
+    bottom: 20px;
+}
+
+label {
+    color: var(--bs-primary)
+}
+
+.options div {
+    margin-top: 10px;
+}
