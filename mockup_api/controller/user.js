@@ -1,5 +1,5 @@
-const allUserRecords = require("../model/database");
-
+let { userDatabase } = require("../model/database");
+let allUserRecords = userDatabase;
 exports.homepage = function(req, res) {
     res.render('index');
 };
@@ -35,14 +35,14 @@ exports.updateUser = function(req, res) {
         // sets the updated record id to the user id
         updatedUserRecord.id = user.id;
         // sets the updated user name to the user new name or use the old name
-        updatedUserRecord.name = req.body.name || user.name;
+        updatedUserRecord.name = req.body.name ? req.body.name.trim() : user.name;
         // sets the updated user age to the user new age or use the old age
         updatedUserRecord.age = req.body.age || user.age;
         // sets the updated user address to the user new address or use the old address
-        updatedUserRecord.address = req.body.address || user.address;
+        updatedUserRecord.address = req.body.address ? req.body.address.trim() : user.address;
 
         // update photo
-        updatedUserRecord.photo = req.file.path || user.photo;
+        updatedUserRecord.photo = req.file ? req.file.path : user.photo;
         // updates the user record with the updated one
         allUserRecords.splice(user.dataId, 1, updatedUserRecord);
         // sends out all users records with the updated one
@@ -62,7 +62,7 @@ exports.getOneUser = function(req, res) {
         else return false;
     });
     // check if user exists before sending out response
-    if (user) res.status(200).send(user);
+    if (user) res.status(200).json({ message: "User retrieved successfully.", data: user });
     else res.status(404).send("User not found");
 };
 
@@ -87,7 +87,9 @@ exports.deleteUser = function(req, res) {
     if (user) {
         // delete the user using their index
         allUserRecords.splice(user.dataId, 1);
-        // send out response to the client
+
+        delete user.dataId
+            // send out response to the client
         res.status(200).send({ succes: true, data: user, message: "User deleted successfully" });
     } else res.status(404).json({ success: false, message: "User not found" });
 };
@@ -96,6 +98,7 @@ exports.deleteUser = function(req, res) {
 exports.createUser = function(req, res) {
     // object destructuring
     const { name, address, age } = req.body;
+
     // checks if the request data isn't empty
     if (name && address && age) {
         // create a new id if the array is empty
@@ -104,13 +107,19 @@ exports.createUser = function(req, res) {
         if (allUserRecords.length > 0) id = allUserRecords[allUserRecords.length - 1].id + 1;
         // sets the user id 
         req.body.id = id;
+        const newUser = {
+            id,
+            name: name.trim(),
+            address: address.trim(),
+            age
+        };
         // save the data in our database
-        allUserRecords.push(req.body);
+        allUserRecords.push(newUser);
 
         // send out response to the client
-        res.status(201).json({ success: true, data: req.body });
+        res.status(201).json({ success: true, data: req.body, message: "User created successfully" });
     } else {
         // sends out error if the request data is empty or missing some required data
-        res.status(400).json({ success: false, message: "Bad input" });
+        res.status(400).json({ success: false, message: "Bad input! name, age and address are required." });
     }
 };
