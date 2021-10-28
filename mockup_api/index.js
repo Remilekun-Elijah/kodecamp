@@ -14,19 +14,19 @@ app.use(express.static(path.resolve('public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', user.homepage)
+app.get('/v1/', user.homepage)
 
 // updates a user 
-app.put('/user/:id', upload.single("avatar"), user.updateUser);
+app.put('/v1/user/:id', upload.single("avatar"), user.updateUser);
 
 // get all users
-app.get("/user/all", user.getAllUsers);
+app.get("/v1/user/all", user.getAllUsers);
 
 // Get a single user
-app.get("/user/:id", user.getOneUser);
+app.get("/v1/user/:id", user.getOneUser);
 // create a user
-app.post("/user", user.createUser);
-app.delete('/user/:id', user.deleteUser);
+app.post("/v1/user", user.createUser);
+app.delete('/v1/user/:id', user.deleteUser);
 
 // set the port to listening on 
 app.set('port', process.env.PORT || 3000);
