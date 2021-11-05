@@ -63,7 +63,7 @@ body {
 .options {
     font-size: 18px;
     position: absolute;
-    bottom: 20px;
+    bottom: 0px;
 }
 
 label {

@@ -11,15 +11,20 @@
     "author": "Remilekun Elijah",
     "license": "MIT",
     "devDependencies": {
-        "nodemon": "^2.0.13"
+        "nodemon": "^2.0.13",
+        "jest": "^27.3.1",
+        "supertest": "^6.1.6"
     },
     "dependencies": {
         "bcrypt": "^5.0.1",
+        "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "joi": "^17.4.2",
         "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.0.12",
         "morgan": "^1.10.0",
         "multer": "^1.4.3",
+        "nodemailer": "^6.7.0",
         "uuid": "^8.3.2"
     }
 }
