@@ -2,6 +2,8 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const joi = require("joi");
+const emailService = require('../utils/email');
+
 const { userDatabase, profileDatabase } = require("../model/database");
 
 const { userModel, profileModel, permissionModel } = require('../model/user');
@@ -13,7 +15,6 @@ const accountDb = userDatabase;
 const fs = require('fs'),
     path = require("path");
 
-const emailService = require('../utils/email');
 const { log } = require("console");
 
 exports.homepage = function(req, res) {
@@ -26,6 +27,7 @@ exports.homepage = function(req, res) {
 exports.profile = function(req, res) {
     res.sendFile(path.resolve("views/profile.html"));
 };
+
 
 exports.uploadImage = (req, res) => {
     const email = req.userEmail;
@@ -65,8 +67,8 @@ exports.deleteUser = async function(req, res) {
     console.log(id);
     try {
         // deletes user account
-        let deletedUsers = await userModel.findByIdAndDelete(id);
-        let deletedUser = {...deletedUsers._doc };
+        let deletedUser = await userModel.findByIdAndDelete(id);
+        deletedUser = {...deletedUser._doc };
 
         console.log(deletedUser);
         // checks if the user account was deleted / found

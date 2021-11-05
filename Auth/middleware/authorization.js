@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-module.exports = (req, res, next) => {
+exports.loginAuthorization = (req, res, next) => {
     try {
         // gets the token from authorization header
         let token = req.headers.authorization.split(" ")[1];
@@ -16,5 +16,21 @@ module.exports = (req, res, next) => {
         next();
     } catch (error) {
         res.status(401).json({ okay: false, message: "Session expired, please login again." });
+    }
+}
+
+exports.adminAuthorization = async (req, res, next) => {
+    const { userModel, profileModel, permissionModel } = require('../model/user');
+    try {
+        const permission = await permissionModel.findOne({user: res.locals.userId});
+
+    // checks if user exist
+    if (permission) {
+        // gets the user profile details
+        if(permission.type === "admin"|| permission.type === "superAdmin") next();
+        else res.status(401).json({ okay: false, message: "User not authorized!" });
+    } else res.status(404).json({ okay: false, message: 'User account not found' });
+    } catch (error) {
+        res.status(500).json({ okay: false, message: error.message });
     }
 }

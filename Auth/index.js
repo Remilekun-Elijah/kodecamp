@@ -1,7 +1,7 @@
 // imports express from the node_modules folder
 var express = require('express');
 const user = require("./controller/user");
-const authorization = require("./middleware/authorization");
+const {loginAuthorization} = require("./middleware/authorization");
 const morgan = require("morgan");
 const path = require('path');
 const mongoose = require('mongoose');
@@ -50,13 +50,16 @@ app.get("/user/verify", user.verifyAccount);
 app.post('/user/login', user.signIn);
 
 // gets the user profile
-app.post('/profile', authorization, user.getProfile);
+app.post('/profile', loginAuthorization, user.getProfile);
 
-app.patch('/profile', authorization, user.updateProfile);
+app.patch('/profile', loginAuthorization, user.updateProfile);
 
 // deletes user account
-app.delete('/user', authorization, user.deleteUser);
+app.delete('/user', loginAuthorization, user.deleteUser);
 // sets the port to listening on 
+
+app.use(require("./routes/admin"));
+
 app.set('port', process.env.PORT || 3000);
 
 app.use(function(req, res, next) {
